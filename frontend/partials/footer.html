@@ -1,0 +1,66 @@
+<!-- components/footer.html -->
+<footer class="bg-white text-gray-800 px-6 pt-10 pb-4 border-t">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-sm max-w-6xl mx-auto">
+    <!-- 🟥 Logo & mô tả -->
+    <div>
+      <div class="flex items-center gap-2 mb-2">
+        <img src="image/logo.png" alt="Logo" class="h-10" />
+        <span class="font-bold">CÔNG TY TNHH WISDOM</span>
+      </div>
+      <p>MST: 0109991327</p>
+      <p class="mt-2">
+        Wisdom là công ty dẫn đầu về cung cấp giải pháp marketing giúp đem về
+        doanh số cao và sự viral, phát triển bền vững cho doanh nghiệp.
+      </p>
+    </div>
+
+    <!-- 🏢 Văn phòng -->
+    <div>
+      <h3 class="font-bold mb-1">VP Hà Nội</h3>
+      <p>26 Ngõ 110 Trung Kính, Yên Hoà, Cầu Giấy, Hà Nội</p>
+
+      <h3 class="font-bold mt-4 mb-1">VP HCM</h3>
+      <p>
+        C.A Vina Building: 1 Đường số 36 – Khu C, Khu đô thị An Phú An Khánh, An
+        Phú, Tp.Thủ Đức, TP.HCM
+      </p>
+      <p>
+        Tầng 24, Deutsches Haus, 33 Lê Duẩn, phường Bến Nghé, quận 1, TP.HCM
+      </p>
+    </div>
+
+    <!-- 📄 Thông tin -->
+    <div>
+      <h3 class="font-bold mb-2">THÔNG TIN</h3>
+      <p>Điều khoản & Điều kiện</p>
+
+      <h3 class="font-bold mt-4 mb-2">GIỚu THIỆU</h3>
+      <p>Về chúng tôi</p>
+      <p>Tuyển dụng</p>
+      <p>Blog</p>
+    </div>
+
+    <!-- 📩 Đăng ký nhận thông tin -->
+    <div>
+      <h3 class="font-bold mb-2">ĐĂNG KÝ NHẬN THÔNG TIN</h3>
+      <form id="newsletterForm" class="mt-2 flex gap-2">
+        <input
+          type="email"
+          id="newsletterEmail"
+          placeholder="Nhập email của bạn"
+          required
+          class="flex-grow p-2 border rounded"
+        />
+        <button type="submit" class="bg-black text-white px-4 py-2 rounded">
+          Gửi
+        </button>
+      </form>
+      <p id="newsletterMessage" class="text-sm mt-1 text-green-600"></p>
+    </div>
+  </div>
+
+  <!-- 🔻 Thanh đỏ cuối cùng -->
+  <div class="bg-red-600 text-white text-center py-2 mt-6 text-xs">
+    &copy; 2025 Hololab - All rights reserved
+  </div>
+</footer>

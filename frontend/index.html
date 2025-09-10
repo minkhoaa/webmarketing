@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./image/logo.png" type="image/png" />
+    <title>Homepage - WebMarketing</title>
+    <link
+      rel="stylesheet"
+      href="./assets/fonts/fontawesome-free-6.7.2-web/css/all.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/subscribe.js"></script>
+    <script src="./assets/js/services.js"></script>
+    <script src="./assets/js/newsletter.js"></script>
+  </head>
+
+  <body class="bg-white text-gray-800">
+    <script>
+      history.pushState({}, "", "/home");
+    </script>
+
+    <!-- 🔵 NAVBAR -->
+    <div id="site-header"></div>
+    <script>
+      fetch("./partials/header.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("site-header").innerHTML = html;
+          const links = document.querySelectorAll("#site-header a");
+          const currentPage = window.location.pathname.split("/").pop();
+          links.forEach((link) => {
+            const href = link.getAttribute("href");
+            if (href === currentPage) {
+              link.classList.add("text-blue-600");
+            }
+          });
+        });
+    </script>
+
+    <!-- 🟡 HERO SECTION -->
+    <section class="w-full">
+      <img
+        src="./image/banner.jpg"
+        alt="Banner"
+        class="w-full max-h-[400px] object-cover"
+      />
+      <div class="flex justify-center -mt-10">
+        <div
+          class="bg-white rounded-full shadow-md flex items-center px-4 py-2 w-[500px]"
+        >
+          <input
+            type="text"
+            placeholder="Bạn quan tâm đến dịch vụ nào"
+            class="flex-grow outline-none px-2"
+          />
+          <button
+            class="text-white bg-red-600 p-2 px-4 rounded-full cursor-pointer hover:opacity-80"
+          >
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🟠 DỊCH VỤ CỦA CHÚNG TÔI -->
+    <section class="py-12 px-6">
+      <h2 class="text-center text-2xl font-bold mb-6">DỊCH VỤ CỦA CHÚNG TÔI</h2>
+      <p class="text-center text-gray-600 mb-8">
+        Vô cùng tự hào khi cam kết hỗ trợ thành giải pháp truyền thông cho doanh
+        nghiệp bạn
+      </p>
+      <div id="serviceList" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- 🟢 ĐĂNG KÝ TƯ VẤN -->
+    <div id="subscribe-section"></div>
+    <script>
+      fetch("./components/subscribe.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("subscribe-section").innerHTML = html;
+        });
+    </script>
+
+    <!-- ⚫ FOOTER -->
+    <div id="site-footer"></div>
+    <script>
+      fetch("./partials/footer.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("site-footer").innerHTML = html;
+        });
+    </script>
+  </body>
+</html>

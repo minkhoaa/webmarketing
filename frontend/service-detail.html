@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi Tiết Dịch Vụ - Booking Review</title>
+    <link rel="icon" href="image/logo.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="./assets/fonts/fontawesome-free-6.7.2-web/css/all.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-white text-gray-800">
+    <!-- 📌 HEADER -->
+    <div id="site-header"></div>
+    <script>
+      fetch("./partials/header.html")
+        .then((res) => res.text())
+        .then(
+          (html) => (document.getElementById("site-header").innerHTML = html)
+        );
+    </script>
+
+    <!-- 🟢 BANNER -->
+    <section
+      class="w-full flex-shrink-0 text-center flex flex-col justify-center items-center px-4 py-8 md:py-12 lg:py-16"
+      style="background: linear-gradient(90deg, #f3dc79 0%, #08cbfb 100%)"
+    >
+      <h1 class="text-white text-xl md:text-2xl font-bold">
+        DỊCH VỤ BOOKING REVIEW FANPAGE/GROUP
+      </h1>
+      <p class="text-sm text-white mt-1">
+        Home page / Services / Services detail
+      </p>
+    </section>
+
+    <!-- 🔎 CONTENT SECTION -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl px-4 md:px-6 py-12 mx-auto"
+    >
+      <!-- 📝 LEFT CONTENT -->
+      <div class="md:col-span-2 space-y-6">
+        <p class="text-sm md:text-base">
+          Là một người làm kinh doanh hay cung cấp các dịch vụ online thì bạn
+          không thể bỏ lỡ một kênh truyền thông của thời đại chính là Facebook
+          Group. Việc đăng bài trên các group lớn giúp định đúng tệp khách hàng
+          mục tiêu, tăng độ uy tín và nhận diện thương hiệu.
+        </p>
+        <img
+          src="./image/booking-group.jpg"
+          class="rounded shadow w-full"
+          alt="KOL Fanpage"
+        />
+
+        <!-- Accordion FAQs -->
+        <div id="faq-section"></div>
+        <script>
+          fetch("./components/faq-list.html")
+            .then((res) => res.text())
+            .then((html) => {
+              document.getElementById("faq-section").innerHTML = html;
+
+              document.querySelectorAll(".toggle-faq").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                  const content = btn.nextElementSibling;
+                  const icon = btn.querySelector(".icon");
+
+                  const isOpen = !content.classList.contains("hidden");
+
+                  document.querySelectorAll(".faq-content").forEach((el) => {
+                    el.classList.add("hidden");
+                  });
+
+                  document
+                    .querySelectorAll(".toggle-faq .icon")
+                    .forEach((ic) => {
+                      ic.textContent = "+";
+                    });
+
+                  if (!isOpen) {
+                    content.classList.remove("hidden");
+                    icon.textContent = "–";
+                  }
+                });
+              });
+            });
+        </script>
+      </div>
+
+      <!-- 📱 RIGHT SIDEBAR -->
+      <div id="contact-box-container"></div>
+      <script>
+        fetch("./components/contact-box.html")
+          .then((res) => res.text())
+          .then((html) => {
+            document.getElementById("contact-box-container").innerHTML = html;
+          });
+      </script>
+    </div>
+
+    <!-- 📥 NEWSLETTER -->
+    <div id="subscribe-section"></div>
+    <script>
+      fetch("./components/subscribe.html")
+        .then((res) => res.text())
+        .then(
+          (html) =>
+            (document.getElementById("subscribe-section").innerHTML = html)
+        );
+    </script>
+
+    <!-- 📍 FOOTER -->
+    <div id="site-footer"></div>
+    <script>
+      fetch("./partials/footer.html")
+        .then((res) => res.text())
+        .then(
+          (html) => (document.getElementById("site-footer").innerHTML = html)
+        );
+    </script>
+  </body>
+</html>

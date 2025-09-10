@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết bài viết - Blog | WebMarketing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <script src="assets/js/newsletter.js"></script>
+
+  <body class="bg-white text-gray-800">
+    <!-- Header -->
+    <div id="site-header"></div>
+    <script>
+      fetch("partials/header.html")
+        .then((res) => res.text())
+        .then(
+          (html) => (document.getElementById("site-header").innerHTML = html)
+        );
+    </script>
+
+    <section
+      class="mx-auto flex-shrink-0 rounded text-center flex flex-col justify-center items-center"
+      style="
+        width: 1440px;
+        height: 225px;
+        aspect-ratio: 32/5;
+        background: linear-gradient(90deg, #f3dc79 0%, #08cbfb 100%);
+      "
+    >
+      <h1 class="text-white text-2xl font-bold">
+        DỊCH VỤ BOOKING REVIEW FANPAGE/GROUP
+      </h1>
+      <p class="text-sm text-white mt-1">Home page / Blog / Blogdaily</p>
+    </section>
+
+    <!-- Breadcrumb -->
+    <section class="max-w-6xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-bold text-center mb-10">BLOG</h2>
+
+      <div class="space-y-10">
+        <!-- 👉 Mỗi bài viết -->
+        <div class="flex flex-col md:flex-row gap-6 border-b pb-6">
+          <!-- Hình ảnh -->
+          <img
+            src="image/blog-tiktok.jpg"
+            alt="Blog Tiktok"
+            class="w-full md:w-[380px] h-auto object-cover rounded-md shadow"
+          />
+
+          <!-- Nội dung -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-semibold text-lg mb-2">
+                Dịch vụ sản xuất content Tiktok sáng tạo, độc đáo dễ lên xu
+                hướng
+              </h3>
+              <p class="text-sm text-gray-600 mb-4">
+                Sáng tạo content Tiktok làm sao ấn được “triệu view” trở thành
+                ước muốn mà bất kỳ ai sử dụng nền tảng này đều mong đạt được.
+                Tính đến thời điểm hiện tại, sức ảnh hưởng và hiệu quả mà...
+              </p>
+            </div>
+            <a
+              href="#"
+              class="inline-block border border-blue-600 text-blue-600 px-4 py-2 rounded text-sm font-medium hover:bg-blue-600 hover:text-white transition w-fit"
+            >
+              Cần tư vấn
+            </a>
+          </div>
+        </div>
+
+        <!-- 👇 Copy thêm div này để có nhiều bài -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="site-footer"></div>
+    <script>
+      fetch("partials/footer.html")
+        .then((res) => res.text())
+        .then(
+          (html) => (document.getElementById("site-footer").innerHTML = html)
+        );
+    </script>
+  </body>
+</html>

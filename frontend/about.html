@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Về Wisdom - WebMarketing</title>
+    <link rel="icon" href="./image/logo.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="./assets/fonts/fontawesome-free-6.7.2-web/css/all.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-white text-gray-800">
+    <script>
+      history.pushState({}, "", "/about_us");
+    </script>
+
+    <!-- 🔵 HEADER -->
+    <div id="site-header"></div>
+    <script>
+      fetch("./partials/header.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("site-header").innerHTML = html;
+          const links = document.querySelectorAll("#site-header a");
+          const currentPage = window.location.pathname.split("/").pop();
+          links.forEach((link) => {
+            const href = link.getAttribute("href");
+            if (href === currentPage) {
+              link.classList.add("text-blue-600");
+            }
+          });
+        });
+    </script>
+
+    <!-- 🟨 BANNER VỀ CHÚNG TÔI -->
+    <section
+      class="w-full bg-gradient-to-r from-[#F3DC79] to-[#08CBFB] py-12 text-center"
+    >
+      <h1 class="text-3xl font-bold text-white">VỀ CHÚNG TÔI</h1>
+      <p class="text-white text-sm mt-2">Trang chủ / Về chúng tôi</p>
+    </section>
+
+    <!-- 🧩 GIỚI THIỆU -->
+    <section class="max-w-6xl mx-auto px-6 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h2 class="text-2xl font-bold mb-4">Chúng tôi là ai?</h2>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            WebMarketing là công ty tiên phong trong lĩnh vực cung cấp giải pháp
+            tiếp thị toàn diện cho các doanh nghiệp Việt Nam. Với sứ mệnh tạo ra
+            sự bứt phá, chúng tôi kết hợp giữa công nghệ, sáng tạo và hiểu biết
+            thị trường để mang lại hiệu quả thực tế.
+          </p>
+          <p class="text-gray-700 text-sm leading-relaxed mt-4">
+            Chúng tôi tin rằng mỗi thương hiệu đều có một câu chuyện riêng, và
+            nhiệm vụ của WebMarketing là giúp bạn kể câu chuyện ấy một cách mạnh
+            mẽ và truyền cảm hứng nhất.
+          </p>
+        </div>
+        <div>
+          <img
+            src="./image/banner.jpg"
+            alt="Về chúng tôi"
+            class="rounded-lg shadow w-full"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ⭐ GIÁ TRỊ CỐT LÕI -->
+    <section class="bg-gray-50 py-12 px-6">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-2xl font-bold mb-6">Giá trị cốt lõi của chúng tôi</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div
+            class="p-4 bg-white rounded shadow transition-transform transform hover:-translate-y-2"
+          >
+            <h3 class="text-lg font-semibold mb-2">Sáng tạo</h3>
+            <p class="text-sm text-gray-600">
+              Chúng tôi luôn mang đến các ý tưởng mới mẻ, phá cách và phù hợp
+              với từng ngành nghề.
+            </p>
+          </div>
+          <div
+            class="p-4 bg-white rounded shadow transition-transform transform hover:-translate-y-2"
+          >
+            <h3 class="text-lg font-semibold mb-2">Hiệu quả</h3>
+            <p class="text-sm text-gray-600">
+              Chiến dịch được đo lường rõ ràng và tối ưu hoá ngân sách tối đa.
+            </p>
+          </div>
+          <div
+            class="p-4 bg-white rounded shadow transition-transform transform hover:-translate-y-2"
+          >
+            <h3 class="text-lg font-semibold mb-2">Tận tâm</h3>
+            <p class="text-sm text-gray-600">
+              Đồng hành và chăm sóc khách hàng như một đối tác chiến lược lâu
+              dài.
+            </p>
+          </div>
+          <div
+            class="p-4 bg-white rounded shadow transition-transform transform hover:-translate-y-2"
+          >
+            <h3 class="text-lg font-semibold mb-2">Đổi mới</h3>
+            <p class="text-sm text-gray-600">
+              Luôn cập nhật xu hướng công nghệ và hành vi người tiêu dùng.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 👥 ĐỘI NGŨ -->
+    <section class="max-w-6xl mx-auto px-6 py-12">
+      <h2 class="text-2xl font-bold text-center mb-6">Đội ngũ của chúng tôi</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <img
+            src="./image/logo.png"
+            alt="CEO"
+            class="w-32 h-32 mx-auto rounded-full object-cover cursor-pointer hover:scale-125 transition-transform"
+          />
+          <h4 class="mt-3 font-semibold">Nguyễn Văn A</h4>
+          <p class="text-sm text-gray-500">Giám đốc điều hành</p>
+        </div>
+        <div class="text-center">
+          <img
+            src="./image/logo.png"
+            alt="CMO"
+            class="w-32 h-32 mx-auto rounded-full object-cover cursor-pointer hover:scale-125 transition-transform"
+          />
+          <h4 class="mt-3 font-semibold">Trần Thị B</h4>
+          <p class="text-sm text-gray-500">Giám đốc Marketing</p>
+        </div>
+        <div class="text-center">
+          <img
+            src="./image/logo.png"
+            alt="Creative Lead"
+            class="w-32 h-32 mx-auto rounded-full object-cover cursor-pointer hover:scale-125 transition-transform"
+          />
+          <h4 class="mt-3 font-semibold">Lê Văn C</h4>
+          <p class="text-sm text-gray-500">Trưởng bộ phận sáng tạo</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📥 NEWSLETTER -->
+    <div id="subscribe-section"></div>
+    <script>
+      fetch("./components/subscribe.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("subscribe-section").innerHTML = html;
+        });
+    </script>
+
+    <!-- 🔚 FOOTER -->
+    <div id="site-footer"></div>
+    <script>
+      fetch("./partials/footer.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("site-footer").innerHTML = html;
+        });
+    </script>
+  </body>
+</html>

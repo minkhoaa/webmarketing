@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dịch vụ - WebMarketing</title>
+    <link rel="icon" href="image/logo.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="./assets/fonts/fontawesome-free-6.7.2-web/css/all.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="text-gray-800 bg-white">
+    <script>
+      history.pushState({}, "", "/Services");
+    </script>
+    <!-- 🔵 HEADER -->
+    <div id="site-header"></div>
+    <script>
+      fetch("./partials/header.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("site-header").innerHTML = html;
+          const links = document.querySelectorAll("#site-header a");
+          const currentPage = window.location.pathname.split("/").pop();
+          links.forEach((link) => {
+            if (link.getAttribute("href") === currentPage) {
+              link.classList.add("text-blue-600");
+            }
+          });
+        });
+    </script>
+
+    <!-- 🎯 BANNER -->
+    <section
+      class="w-full h-56 flex flex-col justify-center items-center text-white text-center"
+      style="background: linear-gradient(90deg, #f3dc79 0%, #08cbfb 100%)"
+    >
+      <h1 class="text-2xl font-bold">DỊCH VỤ BOOKING REVIEW FANPAGE/GROUP</h1>
+      <p class="text-sm mt-1">Home page / Services</p>
+    </section>
+
+    <!-- 🧭 MAIN CONTENT -->
+    <section
+      class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8"
+    >
+      <!-- SIDEBAR -->
+      <aside class="md:col-span-1">
+        <h2 class="text-lg font-semibold mb-4">Danh mục dịch vụ</h2>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <button onclick="filterServices('all')" class="hover:text-blue-600">
+              Tất cả
+            </button>
+          </li>
+          <li>
+            <button
+              onclick="filterServices('marketing')"
+              class="hover:text-blue-600"
+            >
+              Marketing
+            </button>
+          </li>
+          <li>
+            <button onclick="filterServices('ads')" class="hover:text-blue-600">
+              Quảng cáo
+            </button>
+          </li>
+          <li>
+            <button
+              onclick="filterServices('media')"
+              class="hover:text-blue-600"
+            >
+              Phim & Ảnh
+            </button>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- SERVICE CARDS -->
+      <div
+        id="service-content"
+        class="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-6"
+      >
+        <!-- Card sẽ được render tại đây -->
+      </div>
+    </section>
+
+    <!-- 📥 SUBSCRIBE -->
+    <div id="subscribe-section"></div>
+    <script>
+      fetch("./components/subscribe.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("subscribe-section").innerHTML = html;
+        });
+    </script>
+
+    <!-- 📍 FOOTER -->
+    <div id="site-footer"></div>
+    <script>
+      fetch("./partials/footer.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("site-footer").innerHTML = html;
+        });
+    </script>
+
+    <script>
+      const services = [
+        {
+          id: 1,
+          name: "Cơ sở vững Marketing",
+          category: "marketing",
+          description: "Online vững chắc đa nền tảng nhiều mô hình đa ngành",
+          image: "./image/fanpage.jpg",
+        },
+        {
+          id: 2,
+          name: "Dịch vụ Quảng cáo",
+          category: "ads",
+          description: "Chạy hiệu quả chi phí thấp, chọn lọc đối tượng tối ưu",
+          image: "./image/kol.jpg",
+        },
+        {
+          id: 3,
+          name: "Dịch vụ phim, ảnh",
+          category: "media",
+          description: "Quay dựng sản xuất sản phẩm truyền hình nổi bật",
+          image: "./image/pr.jpg",
+        },
+      ];
+
+      const container = document.getElementById("service-content");
+
+      function renderServices(category) {
+        container.innerHTML = "";
+        const filtered =
+          category === "all"
+            ? services
+            : services.filter((s) => s.category === category);
+
+        if (filtered.length === 0) {
+          container.innerHTML =
+            "<p class='text-gray-500 col-span-2'>Không có dịch vụ nào.</p>";
+          return;
+        }
+
+        filtered.forEach((service) => {
+          const card = document.createElement("div");
+          card.className =
+            "bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden transition-transform transform hover:-translate-y-2";
+          card.innerHTML = `
+            <img src="${service.image}" alt="${service.name}" class="w-full h-48 object-cover" />
+            <div class="p-4 flex flex-col items-center">
+              <h3 class="font-bold text-lg mb-2">${service.name}</h3>
+              <p class="text-sm text-gray-600 mb-3">${service.description}</p>
+              <button onclick="location.href='service-detail.html?id=${service.id}'"
+                class="mt-2 px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition">
+                Xem chi tiết
+              </button>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      }
+
+      function filterServices(cat) {
+        renderServices(cat);
+      }
+
+      renderServices("all");
+    </script>
+  </body>
+</html>

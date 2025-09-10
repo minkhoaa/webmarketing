@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết bài viết - Blog | WebMarketing</title>
+    <link rel="icon" href="image/logo.png" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <script src="assets/js/newsletter.js"></script>
+  <script src="./assets/js/blog.js"></script>
+
+  <body class="bg-white text-gray-800">
+    <script>
+      history.pushState({}, "", "/Blog/Blogdaily");
+    </script>
+    <!-- Header -->
+    <div id="site-header"></div>
+    <script>
+      fetch("../partials/header.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("site-header").innerHTML = html;
+
+          const links = document.querySelectorAll("#site-header a");
+          const currentPage = window.location.pathname.split("/").pop();
+
+          links.forEach((link) => {
+            const href = link.getAttribute("href");
+            if (href === currentPage) {
+              link.classList.add("text-blue-600");
+            }
+          });
+        });
+    </script>
+
+    <section
+      class="mx-auto flex-shrink-0 rounded text-center flex flex-col justify-center items-center"
+      style="
+        width: 1440px;
+        height: 225px;
+        aspect-ratio: 32/5;
+        background: linear-gradient(90deg, #f3dc79 0%, #08cbfb 100%);
+      "
+    >
+      <h1 class="text-white text-2xl font-bold">
+        DỊCH VỤ BOOKING REVIEW FANPAGE/GROUP
+      </h1>
+      <p class="text-sm text-white mt-1">Home page / Blog / Blogdaily</p>
+    </section>
+
+    <!-- Breadcrumb -->
+    <section class="max-w-6xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-bold text-center mb-10">BLOG</h2>
+
+      <div class="space-y-10" id="blog-list"></div>
+    </section>
+
+    <!-- Footer -->
+    <div id="site-footer"></div>
+    <script>
+      fetch("../partials/footer.html")
+        .then((res) => res.text())
+        .then(
+          (html) => (document.getElementById("site-footer").innerHTML = html)
+        );
+    </script>
+  </body>
+</html>

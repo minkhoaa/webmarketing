@@ -1,0 +1,72 @@
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
+      <h1 class="text-2xl font-bold text-center mb-6 text-blue-700">
+        🔐 Admin Login
+      </h1>
+      <form id="adminLoginForm" class="space-y-4">
+        <div>
+          <label for="email" class="block mb-1 font-medium">Email</label>
+          <input
+            type="email"
+            id="email"
+            required
+            class="w-full border p-2 rounded"
+          />
+        </div>
+        <div>
+          <label for="password" class="block mb-1 font-medium">Mật khẩu</label>
+          <input
+            type="password"
+            id="password"
+            required
+            class="w-full border p-2 rounded"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white py-2 rounded"
+        >
+          Đăng nhập
+        </button>
+        <p id="loginMessage" class="text-sm mt-3 text-center"></p>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("adminLoginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value.trim();
+          const message = document.getElementById("loginMessage");
+
+          // Dữ liệu đăng nhập cứng (hoặc bạn có thể kết nối DB sau)
+          const ADMIN = {
+            email: "admin@example.com",
+            password: "admin123",
+          };
+
+          if (email === ADMIN.email && password === ADMIN.password) {
+            localStorage.setItem("admin_token", "secret_token");
+            message.textContent = "Đăng nhập thành công!";
+            message.className = "text-green-600 text-sm mt-3 text-center";
+            setTimeout(() => {
+              window.location.href = "admin.html";
+            }, 1000);
+          } else {
+            message.textContent = "Sai tài khoản hoặc mật khẩu";
+            message.className = "text-red-600 text-sm mt-3 text-center";
+          }
+        });
+    </script>
+  </body>
+</html>

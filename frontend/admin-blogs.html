@@ -1,0 +1,159 @@
+    <!DOCTYPE html>
+    <html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Dashboard - Blog Management</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gray-50 min-h-screen flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-blue-700 text-white p-6">
+        <h2 class="text-2xl font-bold mb-8">Admin Panel</h2>
+        <ul>
+            <li class="mb-4">
+            <a href="./admin.html" class="hover:underline">Dashboard</a>
+            </li>
+            <li class="mb-4">
+            <a href="./admin-blogs.html" class="hover:underline">Blog Management</a>
+            </li>
+            <li class="mb-4">
+            <a href="#" onclick="logout()" class="hover:underline">Đăng xuất</a>
+            </li>
+        </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+        <header class="mb-8">
+            <h1 class="text-2xl font-semibold">Quản lý bài viết</h1>
+        </header>
+
+        <!-- Blog List Section -->
+        <section class="mb-12">
+            <h2 class="text-xl font-semibold mb-4">Danh sách bài viết</h2>
+            <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded shadow">
+                <thead class="bg-green-100 text-left">
+                <tr>
+                    <th class="py-2 px-4">Tiêu đề</th>
+                    <th class="py-2 px-4">Thời gian</th>
+                    <th class="py-2 px-4 text-center">Hành động</th>
+                </tr>
+                </thead>
+                <tbody id="blogList" class="text-sm text-gray-700"></tbody>
+            </table>
+            </div>
+        </section>
+
+        <!-- Add New Blog Post Section -->
+        <section>
+            <h2 class="text-xl font-semibold mb-4">Thêm bài viết mới</h2>
+            <form id="addBlogForm" class="space-y-4">
+            <a href="./blogFrom.html" class="bg-blue-700 text-white px-4 py-2 rounded">
+                Thêm bài viết
+            </a>
+            </form>
+        </section>
+        </div>
+
+        <script>
+        if (!localStorage.getItem("admin_token")) {
+            alert("Bạn cần đăng nhập để truy cập!");
+            window.location.href = "admin-login.html";
+        }
+
+        function logout() {
+            localStorage.removeItem("admin_token");
+            window.location.href = "admin-login.html";
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const blogList = document.getElementById("blogList");
+            loadBlogList();
+
+            // Form submit handler
+            const addBlogForm = document.getElementById("addBlogForm");
+            addBlogForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const title = document.getElementById("title").value;
+            const content = document.getElementById("content").value;
+            
+            await addNewBlog(title, content);
+            });
+        });
+
+        // Load list of blogs
+        function loadBlogList() {
+            fetch("http://localhost:5000/api/blog")
+            .then((res) => res.json())
+            .then((data) => {
+                const blogList = document.getElementById("blogList");
+                blogList.innerHTML = data.data
+                .map(
+                    (blog) =>
+                    `<tr>
+                        <td class="py-2 px-4">${blog.title}</td>
+                        <td class="py-2 px-4">${formatDate(blog.createdAt)}</td>
+                        <td class="py-2 px-4 text-center">
+                        <button onclick="deleteBlog('${blog._id}')" class="text-red-600 hover:underline text-sm">🗑 Xoá</button>
+                        </td>
+                    </tr>`
+                )
+                .join("");
+            })
+            .catch(() => {
+                alert("Lỗi khi tải danh sách bài viết");
+            });
+        }
+
+        // Add new blog post
+        async function addNewBlog(title, content) {
+            try {
+            const res = await fetch("http://localhost:5000/api/blog", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ title, content }),
+            });
+            
+            const data = await res.json();
+            if (data.success) {
+                alert("Thêm bài viết thành công!");
+                loadBlogList(); // Reload the blog list
+            } else {
+                alert("Lỗi khi thêm bài viết");
+            }
+            } catch (error) {
+            alert("Lỗi kết nối khi thêm bài viết");
+            }
+        }
+
+        // Delete a blog post
+        async function deleteBlog(id) {
+            if (!confirm("Bạn có chắc muốn xoá bài viết này?")) return;
+
+            try {
+            const res = await fetch(`http://localhost:5000/api/blog/${id}`, {
+                method: "DELETE",
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert("Đã xoá bài viết thành công");
+                loadBlogList(); // Reload the blog list
+            } else {
+                alert("Xoá thất bại");
+            }
+            } catch (error) {
+            alert("Lỗi khi xoá bài viết");
+            }
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return "";
+            return new Date(dateStr).toLocaleString("vi-VN");
+        }
+        </script>
+    </body>
+    </html>

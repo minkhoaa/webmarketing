@@ -1,0 +1,181 @@
+<!-- product.html -->
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="image/logo.png" type="image/png" />
+    <title>Product - WebMarketing</title>
+    <link
+      rel="stylesheet"
+      href="./assets/fonts/fontawesome-free-6.7.2-web/css/all.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <script src="assets/js/subscribe.js"></script>
+  <script src="assets/js/services.js"></script>
+  <script src="assets/js/newsletter.js"></script>
+
+  <body class="bg-white text-gray-800">
+    <script>
+      history.pushState({}, "", "/product/list");
+    </script>
+    <!-- 📌 HEADER -->
+    <div id="site-header"></div>
+    <script>
+      fetch("../partials/header.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("site-header").innerHTML = html;
+
+          const links = document.querySelectorAll("#site-header a");
+          const currentPage = window.location.pathname.split("/").pop();
+
+          links.forEach((link) => {
+            const href = link.getAttribute("href");
+            if (href === currentPage) {
+              link.classList.add("text-blue-600");
+            }
+          });
+        });
+    </script>
+
+    <!-- 🎯 BANNER -->
+    <section
+      class="mx-auto flex-shrink-0 rounded text-center flex flex-col justify-center items-center"
+      style="
+        width: 1440px;
+        height: 225px;
+        aspect-ratio: 32/5;
+        background: linear-gradient(90deg, #f3dc79 0%, #08cbfb 100%);
+      "
+    >
+      <h1 class="text-white text-2xl font-bold">
+        DỊCH VỤ BOOKING REVIEW FANPAGE/GROUP
+      </h1>
+      <p class="text-sm text-white mt-1">Home page / Product / List</p>
+    </section>
+
+    <!-- 🛍️ SẢN PHẨM -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+      <h2 class="text-2xl font-bold text-center mb-2">
+        SẢN PHẨM CỦA CHÚNG TÔI
+      </h2>
+      <p class="text-center text-gray-600 mb-8">
+        Uy Tín – Chất Lượng – Sáng Tạo – Tận Đỡ – Hiệu Quả
+      </p>
+
+      <div
+        id="product-list"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- Mảng sản phẩm -->
+      </div>
+    </section>
+
+    <!--  SUBSCRIBE -->
+    <div id="subscribe-section"></div>
+    <script>
+      fetch("../components/subscribe.html")
+        .then((res) => res.text())
+        .then(
+          (html) =>
+            (document.getElementById("subscribe-section").innerHTML = html)
+        );
+    </script>
+
+    <!-- FOOTER -->
+    <div id="site-footer"></div>
+    <script>
+      fetch("../partials/footer.html")
+        .then((res) => res.text())
+        .then(
+          (html) => (document.getElementById("site-footer").innerHTML = html)
+        );
+    </script>
+
+    <script>
+      // Mảng sản phẩm
+      const products = [
+        {
+          id: 1,
+          name: "Cơ sở vững Marketing",
+          description: "Online vững chắc đa nền tảng nhiều mô hình đa ngành",
+          image: "../image/fanpage.jpg",
+          link: "../product-detail.html?id=1",
+        },
+        {
+          id: 2,
+          name: "Dịch vụ Quảng cáo",
+          description: "Chạy hiệu quả chi phí thấp, chọn lọc đối tượng tối ưu",
+          image: "../image/kol.jpg",
+          link: "../product-detail.html?id=2",
+        },
+        {
+          id: 3,
+          name: "Dịch vụ phim, ảnh",
+          description: "Quay dựng sản xuất sản phẩm truyền hình nổi bật",
+          image: "../image/pr.jpg",
+          link: "../product-detail.html?id=3",
+        },
+        {
+          id: 4,
+          name: "Cơ sở vững Marketing",
+          description: "Online vững chắc đa nền tảng nhiều mô hình đa ngành",
+          image: "../image/fanpage.jpg",
+          link: "../product-detail.html?id=4",
+        },
+        {
+          id: 5,
+          name: "Dịch vụ Quảng cáo",
+          description: "Chạy hiệu quả chi phí thấp, chọn lọc đối tượng tối ưu",
+          image: "../image/kol.jpg",
+          link: "../product-detail.html?id=5",
+        },
+        {
+          id: 6,
+          name: "Dịch vụ phim, ảnh",
+          description: "Quay dựng sản xuất sản phẩm truyền hình nổi bật",
+          image: "../image/pr.jpg",
+          link: "../product-detail.html?id=6",
+        },
+      ];
+
+      // Render danh sách sản phẩm
+      const productListContainer = document.getElementById("product-list");
+
+      products.forEach((product) => {
+        const productCard = document.createElement("div");
+        productCard.classList.add(
+          "bg-white",
+          "rounded-lg",
+          "shadow",
+          "transition-transform",
+          "transform",
+          "hover:-translate-y-2",
+          "cursor-pointer",
+          "transition-shadow",
+          "duration-300",
+          "overflow-hidden"
+        );
+
+        productCard.innerHTML = `
+          <a href="${product.link}">
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+              class="w-full h-[275px] object-cover"
+            />
+            <div class="flex flex-col items-start p-5 gap-2">
+              <h3 class="font-semibold text-lg">${product.name}</h3>
+              <p class="text-sm text-gray-600">${product.description}</p>
+            </div>
+          </a>
+        `;
+
+        productListContainer.appendChild(productCard);
+      });
+    </script>
+  </body>
+</html>
