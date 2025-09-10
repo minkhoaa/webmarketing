@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const blogForm = document.getElementById('blogForm');
 
-  blogForm.addEventListener('submit', async function(e) {
+  blogForm.addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const title = document.getElementById('title').value;
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/blog', {
+      const response = await fetch('/api/blog', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!serviceList) return;
 
-  fetch("http://localhost:5000/api/services")
+  fetch("/api/services")
     .then((res) => res.json())
     .then((data) => {
       console.log("Dữ liệu dịch vụ từ API:", data);

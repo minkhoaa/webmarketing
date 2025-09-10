@@ -85,7 +85,7 @@
 
         // Load list of blogs
         function loadBlogList() {
-            fetch("http://localhost:5000/api/blog")
+            fetch("/api/blog")
             .then((res) => res.json())
             .then((data) => {
                 const blogList = document.getElementById("blogList");
@@ -110,7 +110,7 @@
         // Add new blog post
         async function addNewBlog(title, content) {
             try {
-            const res = await fetch("http://localhost:5000/api/blog", {
+            const res = await fetch("/api/blog", {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json",
@@ -135,7 +135,7 @@
             if (!confirm("Bạn có chắc muốn xoá bài viết này?")) return;
 
             try {
-            const res = await fetch(`http://localhost:5000/api/blog/${id}`, {
+            const res = await fetch(`/api/blog/${id}`, {
                 method: "DELETE",
             });
             const data = await res.json();

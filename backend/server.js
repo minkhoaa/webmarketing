@@ -8,6 +8,7 @@ const middleware = require("./middleware");
 
 dotenv.config();
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -30,10 +31,21 @@ app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/blog", blogRoutes);
 
-// Database & Server Start
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(5000, () => console.log("✅ Server is running on port 5000"));
-  })
-  .catch((err) => console.error(err));
+// Start server immediately; connect to DB with retry
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Server is running on port ${PORT}`);
+});
+
+const connectWithRetry = () => {
+  mongoose
+    .connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 5000 })
+    .then(() => {
+      console.log("✅ MongoDB connected");
+    })
+    .catch((err) => {
+      console.error("❌ MongoDB connection failed:", err.message);
+      setTimeout(connectWithRetry, 5000);
+    });
+};
+
+connectWithRetry();

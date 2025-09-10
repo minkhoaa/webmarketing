@@ -1,20 +1,35 @@
 services:
   backend:
     build: ./backend
-    ports:
-      - "5000:5000"
+    expose: [5000]
     environment:
-      - MONGO_URI=mongodb://mongo:27017/webmarketing_db
+      - MONGO_URI=mongodb://mongo_db:27017/webmarketing_db
     depends_on:
       - mongo
+    networks: 
+      - backend
+  
+  frontend:
+    build: ./frontend
+    ports:
+      - "7000:80"
+    depends_on:
+      - backend
+    networks:
+      - backend
 
   mongo:
     image: mongo:5
     container_name: mongo_db
-    ports:
-      - "27017:27017"
+    expose: [27017]
     volumes:
       - mongo_data:/data/db
+    networks: 
+      - backend
 
 volumes:
   mongo_data:
+
+networks:
+  backend:
+    driver: bridge

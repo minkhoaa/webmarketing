@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!blogList) return;
 
-  fetch("http://localhost:5000/api/blog")
+  fetch("/api/blog")
     .then((res) => res.json())
     .then((data) => data.data)
     .then((data) => {

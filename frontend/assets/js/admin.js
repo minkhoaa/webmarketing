@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function loadList(endpoint, targetElement, deleteFn) {
-  fetch(`http://localhost:5000/api/${endpoint}`)
+  fetch(`/api/${endpoint}`)
     .then((res) => res.json())
     .then((data) => {
       targetElement.innerHTML = data
@@ -16,12 +16,11 @@ function loadList(endpoint, targetElement, deleteFn) {
           <tr>
             <td class="py-2 px-4">${item.email}</td>
             <td class="py-2 px-4">${formatDate(
-              item.createdAt || item.subscribedAt
-            )}</td>
+            item.createdAt || item.subscribedAt
+          )}</td>
             <td class="py-2 px-4 text-center">
-              <button onclick="${deleteFn.name}('${
-            item._id
-          }')" class="text-red-600 hover:underline text-sm">🗑 Xoá</button>
+              <button onclick="${deleteFn.name}('${item._id
+            }')" class="text-red-600 hover:underline text-sm">🗑 Xoá</button>
             </td>
           </tr>
         `
@@ -41,7 +40,7 @@ function formatDate(dateStr) {
 async function deleteSubscribe(id) {
   if (!confirm("Bạn có chắc muốn xoá người đăng ký tư vấn này?")) return;
   try {
-    const res = await fetch(`http://localhost:5000/api/subscribe/${id}`, {
+    const res = await fetch(`/api/subscribe/${id}`, {
       method: "DELETE",
     });
     if (res.ok) location.reload();
@@ -54,7 +53,7 @@ async function deleteSubscribe(id) {
 async function deleteNewsletter(id) {
   if (!confirm("Bạn có chắc muốn xoá email nhận tin này?")) return;
   try {
-    const res = await fetch(`http://localhost:5000/api/newsletter/${id}`, {
+    const res = await fetch(`/api/newsletter/${id}`, {
       method: "DELETE",
     });
     if (res.ok) location.reload();
